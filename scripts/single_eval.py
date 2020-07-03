@@ -11,7 +11,7 @@ args = parser.parse_args()
 lg = rdkit.RDLogger.logger() 
 lg.setLevel(rdkit.RDLogger.CRITICAL)
 
-pred_data = [line.split()[:2] for line in sys.stdin]
+pred_data = [line.split()[1:] for line in sys.stdin]
 pred_mols = [mol for mol,x in pred_data if float(x) >= 0.5]
 
 fraction_actives = len(pred_mols) / len(pred_data)

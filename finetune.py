@@ -79,7 +79,7 @@ if __name__ == "__main__":
     parser.add_argument('--clip_norm', type=float, default=20.0)
     parser.add_argument('--alpha', type=float, default=1.0)
     parser.add_argument('--beta', type=float, default=0.3)
-    parser.add_argument('--num_decode', type=int, default=20)
+    parser.add_argument('--num_decode', type=int, default=200)
 
     parser.add_argument('--epoch', type=int, default=1)
     parser.add_argument('--anneal_rate', type=float, default=1.0)
