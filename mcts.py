@@ -91,7 +91,8 @@ if __name__ == "__main__":
     parser.add_argument('--c_puct', type=float, default=10)
     parser.add_argument('--max_atoms', type=int, default=20)
     parser.add_argument('--min_atoms', type=int, default=15)
-    parser.add_argument('--prop_delta', type=float, default=0.7)
+    parser.add_argument('--prop_delta', type=float, default=0.5)
+    parser.add_argument('--ncand', type=int, default=2)
     parser.add_argument('--ncpu', type=int, default=15)
     args = parser.parse_args()
 
@@ -113,7 +114,11 @@ if __name__ == "__main__":
     pool = Pool(args.ncpu)
     results = pool.map(work_func, data)
 
+    rset = set()
     for orig_smiles, rationales in results:
-        for x in rationales:
-            print(orig_smiles, x.smiles, len(x.atoms), x.P)
+        rationales = sorted(rationales, key=lambda x:len(x.atoms))
+        for x in rationales[:args.ncand]:
+            if x.smiles not in rset:
+                print(orig_smiles, x.smiles, len(x.atoms), x.P)
+                rset.add(x.smiles)
 

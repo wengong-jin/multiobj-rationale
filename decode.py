@@ -18,7 +18,7 @@ parser.add_argument('--rationale', default=None)
 parser.add_argument('--atom_vocab', default=common_atom_vocab)
 parser.add_argument('--model', required=True)
 
-parser.add_argument('--num_decode', type=int, default=20)
+parser.add_argument('--num_decode', type=int, default=100)
 parser.add_argument('--seed', type=int, default=1)
 
 parser.add_argument('--rnn_type', type=str, default='LSTM')

@@ -82,7 +82,7 @@ if __name__ == "__main__":
     parser.add_argument('--num_decode', type=int, default=20)
 
     parser.add_argument('--epoch', type=int, default=1)
-    parser.add_argument('--anneal_rate', type=float, default=0.95)
+    parser.add_argument('--anneal_rate', type=float, default=1.0)
     parser.add_argument('--print_iter', type=int, default=50)
 
     args = parser.parse_args()
