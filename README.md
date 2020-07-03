@@ -29,7 +29,7 @@ Given a set of rationales, the model learns to complete them into full molecules
 ```
 python finetune.py \
   --init_model ckpt/chembl-h400beta0.3/model.20 --save_dir ckpt/tmp/ \
-  --rationale data/gsk3_jnk3_qed_sa/rationales.txt --num_decode 200 --prop gsk3,jnk3,qed,sa --epoch 70
+  --rationale data/gsk3_jnk3_qed_sa/rationales.txt --num_decode 200 --prop gsk3,jnk3,qed,sa --epoch 30 --alpha 0.5
 ```
 
 ### Step 2: Molecule Generation
