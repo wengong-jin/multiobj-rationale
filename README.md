@@ -10,10 +10,10 @@ python properties.py --prop gsk3,jnk3 < data/dual_gsk3_jnk3/rationales.txt
 ```
 
 ## Rationale Extraction
-The rationale extraction module will produce a list of triplets `(molecule, rationale, score)`, where `molecule` is an active compound, `rationale` is a subgraph that explains the property and `score` is its predicted score. The following script uses 15 CPU cores (can be adjusted with `--ncpu` argument):
+The rationale extraction module will produce a list of triplets `(molecule, rationale, score)`, where `molecule` is an active compound, `rationale` is a subgraph that explains the property and `score` is its predicted score. The following script uses 4 CPU cores (can be adjusted with `--ncpu` argument):
 ```
-python mcts.py --data data/jnk3/actives.txt --prop jnk3 > jnk3_rationales.txt
-python mcts.py --data data/gsk3/actives.txt --prop gsk3 > gsk3_rationales.txt
+python mcts.py --data data/jnk3/actives.txt --prop jnk3 --ncpu 4 > jnk3_rationales.txt
+python mcts.py --data data/gsk3/actives.txt --prop gsk3 --ncpu 4 > gsk3_rationales.txt
 ```
 To construct multi-property rationales, we can merge the single-property rationales for GSK3 and JNK3:
 ```
