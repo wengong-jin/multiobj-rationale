@@ -62,7 +62,7 @@ if __name__ == "__main__":
     parser.add_argument('--rationale', required=True)
     parser.add_argument('--prop', required=True)
     parser.add_argument('--save_dir', required=True)
-    parser.add_argument('--init_model', required=True)
+    parser.add_argument('--init_model', type=str)
     parser.add_argument('--load_epoch', type=int, default=-1)
     parser.add_argument('--atom_vocab', default=common_atom_vocab)
 
