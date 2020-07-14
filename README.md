@@ -22,7 +22,7 @@ python merge_rationales.py --rationale1 data/gsk3/rationales.txt --rationale2 da
 
 ## GSK3 + JNK3 + QED + SA Molecule Design
 
-This task seeks to design dual inhibitors against GSK3 and JNK3 with drug-likeness and synthetic accessibility constraints. 
+This task seeks to design dual inhibitors against GSK3 and JNK3 with drug-likeness and synthetic accessibility constraints. We have already computed multi-property rationales in `data/gsk3_jnk3_qed_sa/rationales.txt`. It is a subset of GSK3-JNK3 rationales with QED > 0.6 and SA < 4.0. 
 
 ### Step 1: Fine-tuning with Policy Gradient
 Given a set of rationales, the model learns to complete them into full molecules. The molecule completion model has been pre-trained on ChEMBL, and it needs to be fine-tuned so that generated molecules will satisfy all the property constraints. To fine-tune the model on the GSK3 + JNK3 + QED + SA task, run
@@ -41,6 +41,6 @@ python decode.py --model ckpt/gsk3_jnk3_qed_sa/model.final > outputs.txt
 ### Step 3: Evaluation
 You can evaluate the outputs for the four property constraint task by
 ```
-python property.py --prop gsk3,jnk3,qed,sa < outputs.txt | python scripts/qed_sa_eval.py --ref_path data/dual_gsk3_jnk3/actives.txt
+python properties.py --prop gsk3,jnk3,qed,sa < outputs.txt | python scripts/qed_sa_dual_eval.py --ref_path data/dual_gsk3_jnk3/actives.txt
 ```
 Here `--ref_path` contains all the reference molecules which is used for computing the novelty score. 
