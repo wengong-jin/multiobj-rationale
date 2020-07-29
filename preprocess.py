@@ -60,8 +60,8 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--train', required=True)
-    parser.add_argument('--mode', type=int, required=True)
-    parser.add_argument('--batch_size', type=int, default=20)
+    parser.add_argument('--mode', type=int, default=1)
+    parser.add_argument('--batch_size', type=int, default=15)
     parser.add_argument('--ncpu', type=int, default=15)
     args = parser.parse_args()
     print(args)
