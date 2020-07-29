@@ -20,6 +20,18 @@ To construct multi-property rationales, we can merge the single-property rationa
 python merge_rationales.py --rationale1 data/gsk3/rationales.txt --rationale2 data/jnk3/rationales.txt > gsk3_jnk3.txt
 ```
 
+## Generative Model Pre-training
+The molecule completion model is pre-trained on the ChEMBL dataset. To construct the training set, run
+```
+python preprocess.py --train data/chembl/all.txt --ncpu 4
+mkdir chembl-processed
+mv tensor-* chembl-processed
+```
+To train the molecule completion model, run
+```
+python gnn_train.py --train chembl-processed --save_dir ckpt/chembl-molgen
+```
+
 ## GSK3 + JNK3 + QED + SA Molecule Design
 
 This task seeks to design dual inhibitors against GSK3 and JNK3 with drug-likeness and synthetic accessibility constraints. We have already computed multi-property rationales in `data/gsk3_jnk3_qed_sa/rationales.txt`. It is a subset of GSK3-JNK3 rationales with QED > 0.6 and SA < 4.0. 
