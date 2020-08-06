@@ -17,7 +17,7 @@ python mcts.py --data data/gsk3/actives.txt --prop gsk3 --ncpu 4 > gsk3_rational
 ```
 To construct multi-property rationales, we can merge the single-property rationales for GSK3 and JNK3:
 ```
-python merge_rationales.py --rationale1 data/gsk3/rationales.txt --rationale2 data/jnk3/rationales.txt > gsk3_jnk3.txt
+python merge_rationale.py --rationale1 data/gsk3/rationales.txt --rationale2 data/jnk3/rationales.txt > gsk3_jnk3.txt
 ```
 
 ## Generative Model Pre-training
