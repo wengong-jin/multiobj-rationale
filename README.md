@@ -32,6 +32,17 @@ To train the molecule completion model, run
 python gnn_train.py --train chembl-processed --save_dir ckpt/chembl-molgen
 ```
 
+## Generate molecules with specific substructures
+To generate molecules that contain specific substructures (e.g. benzene), first specify a rationale file named `rationale.txt`. Here is one example file with one line for a benzene.
+```
+c1ccc[c:1]c1
+```
+where atoms marked with 1 means the model should grow this fragment from these atoms. Then run
+```
+python decode.py --rationale rationale.txt --model ckpt/chembl-h400beta0.3/model.20 --num_decode 1000
+```
+This will generate 1000 molecules with at least one benzene ring.
+
 ## GSK3 + JNK3 + QED + SA Molecule Design
 
 This task seeks to design dual inhibitors against GSK3 and JNK3 with drug-likeness and synthetic accessibility constraints. We have already computed multi-property rationales in `data/gsk3_jnk3_qed_sa/rationales.txt`. It is a subset of GSK3-JNK3 rationales with QED > 0.6 and SA < 4.0. 
