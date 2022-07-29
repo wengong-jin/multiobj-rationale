@@ -1,0 +1,4 @@
+fraction actives: 0.4602702702702703
+number of active reference 315
+novelty: 0.46388725778038753
+diversity: 0.7122801980901003
