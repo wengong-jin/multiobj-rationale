@@ -53,9 +53,9 @@ class GraphDecoder(nn.Module):
         self.E_a = torch.eye( avocab.size() ).cuda() 
         self.E_b = torch.eye( len(MolGraph.BOND_LIST) ).cuda()
 
-        self.topo_loss = nn.BCEWithLogitsLoss(size_average=False)
-        self.atom_loss = nn.CrossEntropyLoss(size_average=False)
-        self.bond_loss = nn.CrossEntropyLoss(size_average=False)
+        self.topo_loss = nn.BCEWithLogitsLoss(reduction='sum')
+        self.atom_loss = nn.CrossEntropyLoss(reduction='sum')
+        self.bond_loss = nn.CrossEntropyLoss(reduction='sum')
         
     def apply_graph_mask(self, tensors, hgraph):
         fnode, fmess, agraph, bgraph, scope = tensors
