@@ -256,21 +256,25 @@ def extract_subgraph(smiles, selected_atoms):
     mol = Chem.MolFromSmiles(smiles)
     Chem.Kekulize(mol)
     subgraph, roots = __extract_subgraph(mol, selected_atoms) 
-    subgraph = Chem.MolToSmiles(subgraph, kekuleSmiles=True)
-    subgraph = Chem.MolFromSmiles(subgraph)
+    try:
+        # If succeeds
+        subgraph = Chem.MolToSmiles(subgraph, kekuleSmiles=True)
+        subgraph = Chem.MolFromSmiles(subgraph)
 
-    mol = Chem.MolFromSmiles(smiles)  # de-kekulize
-    if subgraph is not None and mol.HasSubstructMatch(subgraph):
-        return Chem.MolToSmiles(subgraph), roots
-
-    # If fails, try without kekulization
-    subgraph, roots = __extract_subgraph(mol, selected_atoms) 
-    subgraph = Chem.MolToSmiles(subgraph)
-    subgraph = Chem.MolFromSmiles(subgraph)
-    if subgraph is not None:
-        return Chem.MolToSmiles(subgraph), roots
-    else:
-        return None, None
+        mol = Chem.MolFromSmiles(smiles)  # de-kekulize
+        if subgraph is not None and mol.HasSubstructMatch(subgraph):
+            return Chem.MolToSmiles(subgraph), roots
+        else:
+            return None, None
+    except rdkit.Chem.rdchem.AtomKekulizeException:
+        # If fails, try without kekulization
+        subgraph, roots = __extract_subgraph(mol, selected_atoms) 
+        subgraph = Chem.MolToSmiles(subgraph)
+        subgraph = Chem.MolFromSmiles(subgraph)
+        if subgraph is not None:
+            return Chem.MolToSmiles(subgraph), roots
+        else:
+            return None, None
 
 def enum_root(smiles, num_decode):
     mol = Chem.MolFromSmiles(smiles)
