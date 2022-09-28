@@ -1,4 +1,4 @@
-smiles,gsk3,jnk3
+smiles,jnk3,gsk3
 c1cc2ccc3ncc(-c4ccc(-c5ccn[nH]5)cc4)cc3c2cn1,0.91,0.52
 c1ccc2c(-c3ccncc3)c[nH]c2c1,0.64,0.81
 c1ccc2cc(-c3n[nH]cc3-c3ccncc3)ccc2c1,0.74,0.72
