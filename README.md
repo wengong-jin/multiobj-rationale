@@ -2,6 +2,15 @@
 
 This is the implementation of our ICML 2020 paper: https://arxiv.org/abs/2002.03244
 
+## Environment Setup
+An environment for rationale can be easily setup via Anaconda:
+```
+git clone https://github.com/wengong-jin/multiobj-rationale.git
+cd multiobj-rationale
+conda env create -f environment.yml
+conda activate rationale
+```
+
 ## Property Predictors
 The property predictors for GSK3 and JNK3 are provided in `data/gsk3/gsk3.pkl` and `data/jnk3/jnk3.pkl`. For example, to predict properties of given molecules, run
 ```
@@ -17,7 +26,7 @@ python mcts.py --data data/gsk3/actives.txt --prop gsk3 --ncpu 4 > gsk3_rational
 ```
 To construct multi-property rationales, we can merge the single-property rationales for GSK3 and JNK3:
 ```
-python merge_rationale.py --rationale1 data/gsk3/rationales.txt --rationale2 data/jnk3/rationales.txt > gsk3_jnk3.txt
+python merge_rationale.py --rationale1 data/gsk3/rationales.txt --rationale2 data/jnk3/rationales.txt --ncpu 4 > gsk3_jnk3.txt
 ```
 
 ## Generative Model Pre-training
@@ -64,6 +73,7 @@ python decode.py --model ckpt/gsk3_jnk3_qed_sa/model.final > outputs.txt
 ### Step 3: Evaluation
 You can evaluate the outputs for the four property constraint task by
 ```
-python properties.py --prop gsk3,jnk3,qed,sa < outputs.txt | python scripts/qed_sa_dual_eval.py --ref_path data/dual_gsk3_jnk3/actives.txt
+python properties.py --prop gsk3,jnk3,qed,sa < outputs.txt > outputs_prop.txt
+python scripts/qed_sa_dual_eval.py --ref_path data/dual_gsk3_jnk3/actives.txt < outputs_prop.txt > outputs_prop_eval.txt
 ```
 Here `--ref_path` contains all the reference molecules which is used for computing the novelty score. 

@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 from __future__ import print_function, division
+
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning)
+warnings.filterwarnings("ignore", category=FutureWarning)
+
 import numpy as np
 from rdkit import Chem
 from rdkit import rdBase

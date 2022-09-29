@@ -20,6 +20,9 @@ pred_mols = [mol for mol,x,y,qed,sa in pred_data if float(x) >= 0.5 and float(y)
 fraction_actives = len(pred_mols) / len(pred_data)
 print('fraction actives:', fraction_actives)
 
+fraction_unique_actives = len(set(pred_mols)) / len(pred_data)
+print('fraction unique actives:', fraction_actives)
+
 with open(args.ref_path) as f:
     next(f)
     true_mols = [line.split(',')[0] for line in f]
